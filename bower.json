@@ -1,0 +1,19 @@
+{
+  "name": "km-pelican-theme",
+  "homepage": "https://github.com/KoertnerMuth/km-pelican-theme",
+  "authors": [
+    "Tim Krämer <tk@tk22.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/components",
+    "test",
+    "tests"
+  ]
+}

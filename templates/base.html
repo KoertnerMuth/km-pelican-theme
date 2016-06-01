@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/components/bootstrap/dist/css/bootstrap.min.css">
+    <link href="{{ SITEURL }}/theme/css/style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% endblock head %}
+</head>
+
+<body id="index" class="archive">
+<div class="container">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li
+                    {% if author or tag %} class="active" {% endif %}{% block archclass %}{{ ARCHCLASS }}{% endblock
+                    archclass
+                    %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+            {% for p in PAGES %}
+            <li
+                    {% if p == page %} class="active" {% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ SITEURL }}"><img src="{{ SITEURL }}/theme/img/logo.png" width="120" height="33" alt="Logo" /></a>
+        <h2 class="text-muted">{{ SITESUBTITLE }}</h2>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

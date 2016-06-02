@@ -2,33 +2,75 @@
 <html>
 <head>
     {% block head %}
-    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/components/bootstrap/dist/css/bootstrap.min.css">
-    <link href="{{ SITEURL }}/theme/css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock head %}
 </head>
 
 <body id="index" class="archive">
 <div class="container">
     <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li
-                    {% if author or tag %} class="active" {% endif %}{% block archclass %}{{ ARCHCLASS }}{% endblock
-                    archclass
-                    %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
-            {% for p in PAGES %}
-            <li
-                    {% if p == page %} class="active" {% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        <a href="{{ SITEURL }}"><img src="{{ SITEURL }}/theme/img/logo.png" width="120" height="33" alt="Logo" /></a>
-        <h2 class="text-muted">{{ SITESUBTITLE }}</h2>
+        <div class="row">
+            <a href="{{ SITEURL }}"></a>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ SITEURL }}">
+                            <img src="{{ SITEURL }}/theme/img/logo.png" width="120" height="45"
+                                 alt="Körtner & Muth Logo"/>
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{{ SITEURL }}/archives.html">News/Archive</a>
+                            </li>
+                            {% for p in PAGES %}
+                                {% if not p.parent %}
+                                    <li {% if p == page %} class="active" {% endif %}>
+                                        <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if page %}
+                                {% set active_parent = page.parent if page.parent else page.slug %}
+                            {% endif %}
+
+                            {% for p in PAGES %}
+                                {% if page and active_parent and active_parent == p.parent %}
+                                    <li {% if p == page %} class="active" {% endif %}>
+                                        <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
     {% block content %}
     {% endblock %}
 </div>
 </body>
+<link rel="stylesheet" href="{{ SITEURL }}/theme/components/bootstrap/dist/css/bootstrap.min.css">
+<link href="{{ SITEURL }}/theme/css/style.css" rel="stylesheet"/>
+<script src="{{ SITEURL }}/theme/components/jquery/dist/jquery.min.js"></script>
+<script src="{{ SITEURL }}/theme/components/bootstrap/dist/js/bootstrap.min.js"></script>
 </html>

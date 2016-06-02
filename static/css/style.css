@@ -1,6 +1,34 @@
 body {
     color: #5c5c5c;
     background-color: #f6f6f6;
+    font-family: Verdana, sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+    /* add some space if we got enough screen width */
+    .container {
+        margin: 2em auto;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    /* add some space if we got enough screen width */
+    .container {
+        margin: 2em 0 0 5.3em;
+    }
+}
+
+.nav a {
+    font-weight: normal;
+}
+
+/*.nav a:focus, a:hover, a:active, a.active {*/
+/*background-color: transparent!important;*/
+/*color: #f59c00!important;*/
+/*}*/
+
+.navbar-brand {
+    padding-top: 2px !important;
 }
 
 a {
@@ -9,7 +37,8 @@ a {
     font-weight: bold;
     white-space: nowrap;
 }
+
 a:hover {
     color: #f59c00;
-    text-decoration:underline;
+    text-decoration: underline;
 }
